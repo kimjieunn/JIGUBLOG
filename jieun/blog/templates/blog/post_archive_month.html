@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}아카이브(월){% endblock %}
+{% block extra-style %}
+<style>
+    a:link {
+    color : green;
+    text-decoration: none;
+    }
+    a:visited {
+    color : green;
+    text-decoration: none;
+    }
+    a:hover {
+    color : yellowgreen;
+    text-decoration: underline;
+    }
+    a:active {
+    color : green;
+    text-decoration: none;
+    }
+</style>
+{% endblock %}    
+{% block content %}
+<div class="container">
+
+    <h1>Post Archives for {{ month|date:"N, Y"}}</h1>
+
+    <div>
+        <ul>
+            {% for post in object_list %}
+            <li>{{ post.modify_date|date:"Y-m-d"}}&nbsp;&nbsp;
+                <a href="{{ post.get_absolute_url }}"><strong>{{ post.title}}</strong></a>
+            </li>
+            {% endfor%}
+        </ul>
+    </div>
+</div>
+{% endblock %}

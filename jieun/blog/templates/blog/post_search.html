@@ -1,0 +1,47 @@
+    {% extends "base.html" %}
+
+    {% block title %}
+    검색
+    {% endblock %}
+
+    {% block extra-style %}
+    <style>
+        a:link {
+        color : green;
+        text-decoration: none;
+        }
+        a:visited {
+        color : green;
+        text-decoration: none;
+        }
+        a:hover {
+        color : yellowgreen;
+        text-decoration: underline;
+        }
+        a:active {
+        color : green;
+        text-decoration: none;
+        }
+    </style>
+    {% endblock %}
+
+    {% block content %}
+    <div class="container">
+    {% if object_list %}
+    <h2> {{ search_term }} 이(가) 포함된 검색 결과입니다. </h2> <br>
+        {% for post in object_list %}
+        <li>
+            <a class="h3" href='{{ post.get_absolute_url }}'>{{ post }}</a>
+            <!-- <p>{{ post.description }}</p> -->
+        </li> <br>
+        {% endfor %}
+        {% elif search_term %}
+            {{ search_term }}를 찾을 수 없습니다.    
+        {% else %}
+            검색어를 입력하세요
+        {% endif %}
+    </div>
+    {% endblock %}
+
+    {% block script %}
+    {% endblock %}

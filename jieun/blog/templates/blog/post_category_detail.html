@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+<!-- 제목블록 Start -->
+{% block title %}
+카테고리
+{% endblock %}
+<!-- 제목블록 End -->
+
+<!-- 스타일블록 Start -->
+{% block extra-style %}
+<style>
+    a:link {
+    color : green;
+    text-decoration: none;
+    }
+    a:visited {
+    color : green;
+    text-decoration: none;
+    }
+    a:hover {
+    color : yellowgreen;
+    text-decoration: underline;
+    }
+    a:active {
+    color : green;
+    text-decoration: none;
+    }
+</style>
+{% endblock %}
+<!-- 스타일블록 End -->
+
+<!-- 콘텐츠블록 Start -->
+{% block content %}
+<div class="container">
+    <h2> {{ object }} </h2> <br>
+
+    {% for post in posts %}
+    <div class="align-self-auto row">
+        <img src="{{ post.image.thumb_url }}" alt="{{ post.image }}" class="col-md-4" style="width: 200px;">
+        <div class="col-md-8" style="padding-top:50px">
+            <a class="h2" href='{{ post.get_absolute_url }}'>{{ post.title }}</a><br>
+            <p> : {{ post.description }}</p>
+        </div>
+    </div>
+
+    {% endfor%}
+</div>
+    
+{% endblock %}
+<!-- 콘텐츠블록 End -->
+
+<!-- 스크립트블록 Start -->
+{% block extra-script%}
+{% endblock %}
+<!-- 스크립트블록 End -->

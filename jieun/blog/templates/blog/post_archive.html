@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}아카이브{% endblock %}
+{% block extra-style %}
+<style>
+    a:link {
+    color : green;
+    text-decoration: none;
+    }
+    a:visited {
+    color : green;
+    text-decoration: none;
+    }
+    a:hover {
+    color : yellowgreen;
+    text-decoration: underline;
+    }
+    a:active {
+    color : green;
+    text-decoration: none;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Post Archives untail {% now "N d, Y" %}</h1>
+    <ul>
+        {% for date in date_list %}
+        <li style="display: inline;">
+            <a href="{% url 'blog:post_year_archive' date|date:'Y' %}">Year{{ date|date:"Y" }} </a></li>
+        {% endfor %}
+    </ul>
+    <br/>
+
+    <div>
+        <ul>
+            {% for post in object_list %}
+            <li>{{post.modify_dt|date:"Y-m-d" }}&nbsp;&nbsp;&nbsp;
+            <a href="{{ post.get_absolute_url }}"><strong>{{ post.title }}</strong></a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

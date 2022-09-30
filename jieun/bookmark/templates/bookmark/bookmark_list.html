@@ -1,0 +1,41 @@
+
+{% extends "base.html" %}
+
+{% block title %}bookmark_list.html{% endblock %}
+{% block extra-style %}
+<style>
+    a:link {
+    color : green;
+    text-decoration: none;
+    }
+    a:visited {
+    color : green;
+    text-decoration: none;
+    }
+    a:hover {
+    color : yellowgreen;
+    text-decoration: underline;
+    }
+    a:active {
+    color : green;
+    text-decoration: none;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <a class="h1 mr-5">북마크 리스트</a>
+    {% if user.is_active %}
+        <a class="btn btn-online-dark" href=" {% url 'bookmark:add' %}">글쓰기</a>
+        <a class="btn btn-online-dark" href=" {% url 'bookmark:change' %}">수정하기</a> <br>
+    {% endif %}
+    <ul>
+        {% for bm in object_list %}
+        <li>
+            <a href="{% url 'bookmark:detail' bm.id %}">{{ bm }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+</ul>

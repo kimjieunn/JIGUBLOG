@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+<!-- 제목 블록 Start (기본값 My Blog Page) -->
+{% block title %}
+사이트 수정
+{% endblock %}
+<!-- 제목 블록 End -->
+
+<!-- 스타일 블록 Start -->
+{% block extra-style %}
+<style>
+    a:link {
+    color : green;
+    text-decoration: none;
+    }
+    a:visited {
+    color : green;
+    text-decoration: none;
+    }
+    a:hover {
+    color : yellowgreen;
+    text-decoration: underline;
+    }
+    a:active {
+    color : green;
+    text-decoration: none;
+    }
+</style>
+{% endblock %}
+<!-- 스타일 블록 End -->
+
+<!-- 콘텐츠 블록 Start -->
+{% block content %}
+<div class="container">
+    <h1>사이트 수정 - {{ user }}</h1>
+    <br>
+
+    <table class="table table-bordered table-sm table-striped">
+
+        <thead>
+            <tr class="table-primary">
+                <th>title</th>
+                <th>url</th>
+                <th>Owner</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for item in object_list %}
+            <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.url }}</td>
+                <td>{{ item.owner }}</td>
+                <td><a href="{% url 'blog:site_update' item.id %}">Update</a></td>
+                <td><a href="{% url 'blog:site_delete' item.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+{% endblock %}
+<!-- 콘텐츠 블록 End -->
+
+<!-- 스크립트 블록 Start -->
+{% block extra-script %}
+
+{% endblock %}
+<!-- 스크립트 블록 End -->

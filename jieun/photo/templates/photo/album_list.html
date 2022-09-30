@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+<!-- 제목블록 Start -->
+{% block title %}
+album_list.html
+{% endblock %}
+<!-- 제목블록 End -->
+
+<!-- 스타일블록 Start -->
+{% block extra-style %}
+<style>
+.bhumbnail {
+    border: 2px solid #ccc;
+}
+    a:link {
+    color : green;
+    text-decoration: none;
+    }
+    a:visited {
+    color : green;
+    text-decoration: none;
+    }
+    a:hover {
+    color : yellowgreen;
+    text-decoration: underline;
+    }
+    a:active {
+    color : green;
+    text-decoration: none;
+    }
+</style>
+{% endblock %}
+<!-- 스타일블록 End -->
+
+<!-- 콘텐츠블록 Start -->
+{% block content %}
+<div class="container">
+    <br>
+    <a class='h1 mr-5'>앨범 목록  </a>
+    {% if user.is_active %}
+        <a class="btn btn-online-dark" href=" {% url 'photo:album_add' %}">앨범 추가</a>
+        <a class="btn btn-online-dark" href=" {% url 'photo:album_change' %}">앨범 수정</a> /
+        <a class="btn btn-online-dark" href=" {% url 'photo:photo_add' %}">사진 업로드</a>
+        <a class="btn btn-online-dark" href=" {% url 'photo:photo_change' %}">사진 수정</a> <br><br>
+    {% endif %}
+
+    {% for album in object_list %}
+    <li>
+        <a class='h5' href='{{ album.get_absolute_url }}'>{{ album }}</a>
+    </li>
+        {% endfor%} <br>
+
+    {% for object in object_list %} 
+    <div class="mt-3">
+        <span class="h2">{{ object }}</span>
+        <span class="h5 ml-2">: {{ object.description }}</span>
+    </div>
+    <hr style="margin: 0 0 30px 0;">
+    <div class="row">
+            {% for photo in object.photo_set.all|slice:':5' %}
+            <div class="thumbnail col-4">
+                {% comment %}
+                제목: {{ photo }}<br>
+                사진 설명: {{ photo.description }} <br>  
+                업로드일: {{ photo.upload_dt }} <br>
+                이미지 경로: {{ photo.image.url }}<br> 
+                쎔네일 경로: {{ photo.image.thumb_url }}<br> 
+                상세보기 경로: {{ photo.get_absolute_url }}<br>
+                {% endcomment %}
+                <a href="{{ photo.get_absolute_url }}">
+                   <img src="{{ photo.image.thumb_url }}" alt="{{ photo }}" style="width: 300px;">
+                </a>
+            </div>
+            {% endfor %}  
+                <hr>
+        <hr>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+<!-- 콘텐츠블록 End -->
+
+<!-- 스크립트블록 Start -->
+{% block extra-script%}
+{% endblock %}
+<!-- 스크립트블록 End -->

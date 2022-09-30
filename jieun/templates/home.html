@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+
+{% block title %}
+HOME
+{% endblock %}
+
+{% block extra-style %}
+<style >    
+h2{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 900;
+}
+
+p{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+
+}
+
+#hero {
+    width: 100%;
+    height: 70vh;
+    background-color: rgba(9, 9, 9, 0.8);
+    overflow: hidden;
+    position: relative;
+    }
+
+    #hero .carousel,
+    #hero .carousel-inner,
+    #hero .carousel-item,
+    #hero .carousel-item::before {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    }
+
+    #hero .carousel-item::before {
+    content: "";
+    background-color: rgba(45, 103, 60, 0.8);
+    }
+
+    #hero .carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 50px;
+    right: 50px;
+    }
+
+    #hero .container {
+    text-align: center;
+    }
+
+    #hero h2 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 48px;
+    font-weight: 700;
+    }
+
+    #hero p {
+    -webkit-animation-delay: 0.4s;
+    animation-delay: 0.4s;
+    margin: 0 auto 30px auto;
+    color: #fff;
+    }
+
+    #hero .carousel-inner .carousel-item {
+    transition-property: opacity;
+    background-position: center top;
+    }
+
+    #hero .carousel-inner .carousel-item,
+    #hero .carousel-inner .active.carousel-item-start,
+    #hero .carousel-inner .active.carousel-item-end {
+    opacity: 0;
+    }
+
+    #hero .carousel-inner .active,
+    #hero .carousel-inner .carousel-item-next.carousel-item-start,
+    #hero .carousel-inner .carousel-item-prev.carousel-item-end {
+    opacity: 1;
+    transition: 0.5s;
+    }
+
+    #hero .carousel-control-next-icon,
+    #hero .carousel-control-prev-icon {
+    background: none;
+    font-size: 30px;
+    line-height: 0;
+    width: auto;
+    height: auto;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    transition: 0.3s;
+    color: rgba(255, 255, 255, 0.5);
+    width: 54px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+    #hero .carousel-control-next-icon:hover,
+    #hero .carousel-control-prev-icon:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.8);
+    }
+
+    #hero .carousel-indicators li {
+    cursor: pointer;
+    background: #fff;
+    overflow: hidden;
+    border: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50px;
+    opacity: 0.6;
+    transition: 0.3s;
+    }
+
+    #hero .carousel-indicators li.active {
+    opacity: 1;
+    background: #5cb874;
+    }
+
+    #hero .btn-get-started {
+    font-family: "Raleway", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 4px;
+    transition: 0.5s;
+    line-height: 1;
+    color: #fff;
+    -webkit-animation-delay: 0.8s;
+    animation-delay: 0.8s;
+    background: #5cb874;
+    }
+
+    #hero .btn-get-started:hover {
+    background: #6ec083;
+    }
+
+    @media (max-width: 992px) {
+    #hero {
+        height: 100vh;
+    }
+
+    #hero .carousel-container {
+        top: 66px;
+    }
+    }
+
+    @media (max-width: 768px) {
+    #hero h2 {
+        font-size: 28px;
+    }
+    }
+
+    @media (min-width: 1024px) {
+
+    #hero .carousel-control-prev,
+    #hero .carousel-control-next {
+        width: 5%;
+    }
+    }
+
+    @media (max-height: 500px) {
+    #hero {
+        height: 120vh;
+    }
+    }
+
+</style>
+<script>
+    /**
+   * Hero carousel indicators
+   */
+  let heroCarouselIndicators = select("#hero-carousel-indicators")
+  let heroCarouselItems = select('#heroCarousel .carousel-item', true)
+
+  heroCarouselItems.forEach((item, index) => {
+    (index === 0) ?
+    heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + index + "' class='active'></li>":
+      heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + index + "'></li>"
+  });
+</script>
+{% endblock %}
+
+{% block content %}
+     <!-- ======= Hero Section ======= -->
+    <section id="hero">
+        <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+        <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+        <div class="carousel-inner" role="listbox">
+
+            <!-- Slide 1 -->
+            <div class="carousel-item active" style="background-image: url(static/img/지구.jpg)">
+            <div class="carousel-container">
+                <div class="container">
+                <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Green</span></h2>
+                <p class="animate__animated animate__fadeInUp">The earth is falling apart. We must protect the Earth.<br>We have a moral obligation to protect the environment.</p>
+                <a href="{% url 'blog:index' %}" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+  <!-- End Hero -->
+
+    <div id="main-content" class="container">
+        <hr style="margin: 10px 0">
+
+        <div class="row gx-4 gx-lg-5">
+            <div class="col-md-4 mb-5">
+                <div class="card h-100">
+                    <a href="#!"><img class="card-img-top" src="/media/photo/2022/09/티핑포인트.thumb.jpg" alt="..."></a>
+                    <div class="card-body">
+                        <div class="small text-muted">January 1, 2022</div>
+                        <h2 class="card-title">기후위기 티핑포인트</h2>
+                        <p class="card-text">최근, 국제연구팀이 머지 않아 기후위기로 인한 여러 위험이 '촉발' 될 수 있다는 분석을 내놓았다. " 인류의 온실가스 배출로 인해 지구는 이미 티핑포인트 비상구역으로 들어서게 되었다. 잠재적인 티핑포인트 16개 중 5개 위험은...</p>
+                    </div>
+                    <div class="card-footer"><a class="btn btn-success btn-sm" href="/blog/post/기후위기-티핑포인트/">더보기</a></div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-5">
+                <div class="card h-100">
+                    <a href="#!"><img class="card-img-top" src="/media/photo/2022/09/태풍.thumb.jpg" alt="..."></a>
+                    <div class="card-body">
+                        <div class="small text-muted">January 1, 2022</div>
+                        <h2 class="card-title">한반도를 훑고간 슈퍼태풍 힌남노</h2>
+                        <p class="card-text">얼마 전 힌남노가 우리나라에 뿌린 비의 양은 제주 윗세오름엔 1,059.0㎜, 경주에는 447,5mm, 울산에는 385.5mm의 강수량이 기록되었다. 제주 서귀포에서는 2015년 관측 시작 이후 가장 높은 21m까지 파도가 관측되기도 하였다. 강...</p>
+                    </div>
+                    <div class="card-footer"><a class="btn btn-success btn-sm" href="/blog/post/한반도를-훑고간-슈퍼태풍-힌남노/">더보기</a></div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-5">
+                <div class="card h-100">
+                    <a href="#!"><img class="card-img-top" src="/media/photo/2022/09/친환경연구.thumb.jpg" alt="..."></a>
+                    <div class="card-body">
+                        <div class="small text-muted">January 1, 2022</div>
+                        <h2 class="card-title">친환경 연구</h2>
+                        <p class="card-text">“전 세계가 지금처럼 이산화탄소를 배출한다면 2028~2031년에는 1.5℃ 저지선이 뚫린다” -청와대, 미국 캘리포니아-주립대, 프랑스 기후환경과학연구소(LSCE) 등 국제연구팀의 [네이처리뷰스] 발표 중- 하루에도 수차례 오르내리는 게...</p>
+                    </div>
+                    <div class="card-footer"><a class="btn btn-success btn-sm" href="/blog/post/친환경-연구/">더보기</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

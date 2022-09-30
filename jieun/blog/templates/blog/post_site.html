@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+<!-- 제목블록 Start -->
+{% block title %}
+사이트
+{% endblock %}
+<!-- 제목블록 End -->
+
+<!-- 스타일블록 Start -->
+{% block extra-style %}
+<style>
+    a:link {
+    color : green;
+    text-decoration: none;
+    }
+    a:visited {
+    color : green;
+    text-decoration: none;
+    }
+    a:hover {
+    color : yellowgreen;
+    text-decoration: underline;
+    }
+    a:active {
+    color : green;
+    text-decoration: none;
+    }
+</style>
+{% endblock %}
+<!-- 스타일블록 End -->
+
+<!-- 콘텐츠블록 Start -->
+{% block content %}
+<div class="container">
+    <a class="h1 mr-5">사이트</a>
+        {% if user.is_active %}
+            <a class="btn btn-online-dark" href=" {% url 'blog:site_add' %}">사이트 추가하기</a>
+            <a class="btn btn-online-dark" href=" {% url 'blog:site_change' %}">사이트 수정하기</a> <br><br>
+        {% endif %}
+        <br>
+        {% for site in object_list %}
+
+        <img src="{{ site.image.thumb_url }}" alt="{{ site.image }}" class="col-md-4" style="width: 200px;">
+        <a class='h3' href='{{ site.url }}'>{{ site.title }}</a> <br>
+
+        {% endfor%}
+    <br />
+</div>
+{% endblock %}
+<!-- 콘텐츠블록 End -->
+
+<!-- 스크립트블록 Start -->
+{% block extra-script%}
+{% endblock %}
+<!-- 스크립트블록 End -->

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+<!-- 제목블록 Start -->
+{% block title %}
+photo_detail.html
+{% endblock %}
+<!-- 제목블록 End -->
+
+<!-- 스타일블록 Start -->
+{% block extra-style %}
+<style>
+    a:link {
+    color : green;
+    text-decoration: none;
+    }
+    a:visited {
+    color : green;
+    text-decoration: none;
+    }
+    a:hover {
+    color : yellowgreen;
+    text-decoration: underline;
+    }
+    a:active {
+    color : green;
+    text-decoration: none;
+    }
+</style>
+{% endblock %}
+<!-- 스타일블록 End -->
+
+<!-- 콘텐츠블록 Start -->
+{% block content %}
+<div class="container">
+    <h2 class="'mt-5" style="font-weight: bold;">{{ object.title }}</h2>
+    <div class="row">
+        <div class="'col-md-9">
+            <a href="{{ object.image.url }}">
+                <img class="ml-3" src="{{ photo.image.thumb_url }}" alt="{{ photo }}" style="width: 200px;">
+            </a>
+        </div>
+
+        <ul class="'col-md-3 mt-3">
+            <li>사진 설명</li>
+                {% if object.description %}<p>{{ object.description|linebreaks }}</p>
+                {% else %}<p>(blank)</p>{% endif %}
+            <li>업로드 날짜</li>
+                <p>{{ object.upload_dt }}</p>
+            <li>앨범 이름</li>
+            <a href="{% url 'photo:album_detail' object.album.id %}" {{ object.album.name }}></a>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+<!-- 콘텐츠블록 End -->
+
+<!-- 스크립트블록 Start -->
+{% block extra-script%}
+{% endblock %}
+<!-- 스크립트블록 End -->

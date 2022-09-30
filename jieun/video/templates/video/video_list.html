@@ -1,0 +1,42 @@
+{% extends 'base.html' %} 
+{% load embed_video_tags %}
+{% block title %}
+영상
+{% endblock %}
+{% block extra-style %}
+<style>
+    a:link {
+    color : green;
+    text-decoration: none;
+    }
+    a:visited {
+    color : green;
+    text-decoration: none;
+    }
+    a:hover {
+    color : yellowgreen;
+    text-decoration: underline;
+    }
+    a:active {
+    color : green;
+    text-decoration: none;
+    }
+</style>
+{% endblock %}
+{% block content %}
+	<div  class="col-md-8 offset-md-2">
+        <a class="h1 mr-5">영상</a>
+            {% if user.is_active %}
+                <a class="btn btn-online-dark" href=" {% url 'video:video_add' %}">영상 추가하기</a>
+                <a class="btn btn-online-dark" href=" {% url 'video:video_change' %}">영상 수정하기</a> <br><br>
+            {% endif %}
+            <br><br>
+            {% for video in Tut %}
+            <a class="h3">{{ video.title }}</a> <br><br>
+            {% video video.video '1100x492' %}<br>
+            <p>{{ video.text }}</p><br>
+            <hr>
+            {% endfor %}
+	</div>
+    
+{% endblock %}

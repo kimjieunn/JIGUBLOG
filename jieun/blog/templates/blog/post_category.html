@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+<!-- 제목블록 Start -->
+{% block title %}
+카테고리
+{% endblock %}
+<!-- 제목블록 End -->
+
+<!-- 스타일블록 Start -->
+{% block extra-style %}
+<style>
+    a:link {
+    color : green;
+    text-decoration: none;
+    }
+    a:visited {
+    color : green;
+    text-decoration: none;
+    }
+    a:hover {
+    color : yellowgreen;
+    text-decoration: underline;
+    }
+    a:active {
+    color : green;
+    text-decoration: none;
+    }
+</style>
+{% endblock %}
+<!-- 스타일블록 End -->
+
+<!-- 콘텐츠블록 Start -->
+{% block content %}
+<div class="container">
+    <a class="h1 mr-5">카테고리</a>
+        {% if user.is_active %}
+            <a class="btn btn-online-dark" href=" {% url 'blog:category_add' %}">생성하기</a>
+            <a class="btn btn-online-dark" href=" {% url 'blog:category_change' %}">수정하기</a> <br><br>
+        {% endif %}
+        <br><br>
+        {% for category in object_list %}
+        <a class='h2' href='{{ category.get_absolute_url }}'>{{ category }}</a><br><br>
+        {% endfor%}
+    <br />
+</div>
+{% endblock %}
+<!-- 콘텐츠블록 End -->
+
+<!-- 스크립트블록 Start -->
+{% block extra-script%}
+{% endblock %}
+<!-- 스크립트블록 End -->

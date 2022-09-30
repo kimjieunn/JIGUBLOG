@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+<!-- 제목블록 Start -->
+{% block title %}
+custom_page.html
+{% endblock %}
+<!-- 제목블록 End -->
+
+<!-- 스타일블록 Start -->
+{% block extra-style %}
+<style>
+    a:link {
+    color : green;
+    text-decoration: none;
+    }
+    a:visited {
+    color : green;
+    text-decoration: none;
+    }
+    a:hover {
+    color : yellowgreen;
+    text-decoration: underline;
+    }
+    a:active {
+    color : green;
+    text-decoration: none;
+    }
+</style>
+{% endblock %}
+<!-- 스타일블록 End -->
+
+<!-- 콘텐츠블록 Start -->
+{% block content %}
+    <h1>API 사용</h1>
+    {{ boxOfficeResult.boxofficeType }} 
+    {{ boxOfficeResult.showRange }} <br>
+    {% for movie in boxOfficeResult.weeklyBoxOfficeList %}
+        {{ movie.movieNm }} <br>
+    {% endfor %}
+
+{% endblock %}
+<!-- 콘텐츠블록 End -->
+
+<!-- 스크립트블록 Start -->
+{% block extra-script%}
+{% endblock %}
+<!-- 스크립트블록 End -->

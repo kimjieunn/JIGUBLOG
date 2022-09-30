@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 제목 블록 Start (기본값 My Blog Page) -->
+    <title>    
+        {% block title %}
+            JIGU BLOG
+        {% endblock %}
+    </title>
+    <!-- 제목 블록 End -->
+
+    <!-- Bootstrap CSS only -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- font change [pretendard] -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/static/pretendard.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- 공통 스타일 적용 Start -->
+    <style>
+        * {
+            font-family: 'Noto Sans KR', sans-serif, Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        #main-wrapper{
+            margin: 20px 0;
+            height: auto;
+            min-height: 100%;
+            padding-bottom: 266px;
+        }
+        /* footer {
+            height: 266px;
+            position: relative;
+            transform : translateY(-100%);
+            width: 100%;
+            padding: 60px 0;
+            background: #f8f9fa;
+        } */
+        #contact_info  * {
+            color: #96989c;
+            font-size: 14px;
+        }
+    
+        footer .footer_logo {
+            padding-bottom: 24px;
+            color: black;
+            font-weight: 600;
+        }
+
+        /*--------------------------------------------------------------
+        # Header
+        --------------------------------------------------------------*/
+        #header {
+        background: #fff;
+        transition: all 0.5s;
+        z-index: 997;
+        height: 70px;
+        }
+
+        #header.header-scrolled {
+        box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #header .logo {
+        font-size: 40px;
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        }
+
+        #header .logo a {
+        color: #5cb874;
+        }
+
+        #header .logo img {
+        max-height: 40px;
+        }
+
+        .scrolled-offset {
+        margin-top: 70px;
+        }
+
+        /*--------------------------------------------------------------
+        # Navigation Menu
+        --------------------------------------------------------------*/
+        /**
+        * Desktop Navigation 
+        */
+        .navbar {
+        padding: 0;
+        }
+
+        .navbar ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        list-style: none;
+        align-items: center;
+        }
+
+        .navbar li {
+        position: relative;
+        }
+
+        .navbar a,
+        .navbar a:focus {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 0 10px 30px;
+        font-size: 17px;
+        color: #222222;
+        white-space: nowrap;
+        transition: 0.3s;
+        }
+
+        .navbar a i,
+        .navbar a:focus i {
+        font-size: 12px;
+        line-height: 0;
+        margin-left: 5px;
+        }
+
+        .navbar a:hover,
+        .navbar .active,
+        .navbar .active:focus,
+        .navbar li:hover>a {
+        color: #5cb874;
+        }
+
+        .navbar .getstarted,
+        .navbar .getstarted:focus {
+        color: #5cb874;
+        padding: 8px 25px;
+        margin-left: 30px;
+        border-radius: 4px;
+        border: 2px solid #5cb874;
+        transition: 0.3s;
+        font-size: 14px;
+        }
+
+        .navbar .getstarted:hover,
+        .navbar .getstarted:focus:hover {
+        background: #5cb874;
+        color: #fff;
+        }
+
+        .navbar .dropdown ul {
+        display: block;
+        position: absolute;
+        left: 14px;
+        top: calc(100% + 30px);
+        margin: 0;
+        padding: 10px 0;
+        z-index: 99;
+        opacity: 0;
+        visibility: hidden;
+        background: #fff;
+        box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+        transition: 0.3s;
+        }
+
+        .navbar .dropdown ul li {
+        min-width: 200px;
+        }
+
+        .navbar .dropdown ul a {
+        padding: 10px 20px;
+        text-transform: none;
+        }
+
+        .navbar .dropdown ul a i {
+        font-size: 12px;
+        }
+
+        .navbar .dropdown ul a:hover,
+        .navbar .dropdown ul .active:hover,
+        .navbar .dropdown ul li:hover>a {
+        color: #5cb874;
+        }
+
+        .navbar .dropdown:hover>ul {
+        opacity: 1;
+        top: 100%;
+        visibility: visible;
+        }
+
+        .navbar .dropdown .dropdown ul {
+        top: 0;
+        left: calc(100% - 30px);
+        visibility: hidden;
+        }
+
+        .navbar .dropdown .dropdown:hover>ul {
+        opacity: 1;
+        top: 0;
+        left: 100%;
+        visibility: visible;
+        }
+
+        @media (max-width: 1366px) {
+        .navbar .dropdown .dropdown ul {
+            left: -90%;
+        }
+
+        .navbar .dropdown .dropdown:hover>ul {
+            left: -100%;
+        }
+        }
+
+        /**
+        * Mobile Navigation 
+        */
+        .mobile-nav-toggle {
+        color: #222222;
+        font-size: 28px;
+        cursor: pointer;
+        display: none;
+        line-height: 0;
+        transition: 0.5s;
+        }
+
+        .mobile-nav-toggle.bi-x {
+        color: #fff;
+        }
+
+        @media (max-width: 991px) {
+        .mobile-nav-toggle {
+            display: block;
+        }
+
+        .navbar ul {
+            display: none;
+        }
+        }
+
+        .navbar-mobile {
+        position: fixed;
+        overflow: hidden;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background: rgba(9, 9, 9, 0.9);
+        transition: 0.3s;
+        z-index: 999;
+        }
+
+        .navbar-mobile .mobile-nav-toggle {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        }
+
+        .navbar-mobile ul {
+        display: block;
+        position: absolute;
+        top: 55px;
+        right: 15px;
+        bottom: 15px;
+        left: 15px;
+        padding: 10px 0;
+        background-color: #fff;
+        overflow-y: auto;
+        transition: 0.3s;
+        }
+
+        .navbar-mobile a,
+        .navbar-mobile a:focus {
+        padding: 10px 20px;
+        font-size: 15px;
+        color: #222222;
+        }
+
+        .navbar-mobile a:hover,
+        .navbar-mobile .active,
+        .navbar-mobile li:hover>a {
+        color: #5cb874;
+        }
+
+        .navbar-mobile .getstarted,
+        .navbar-mobile .getstarted:focus {
+        margin: 15px;
+        }
+
+        .navbar-mobile .dropdown ul {
+        position: static;
+        display: none;
+        margin: 10px 20px;
+        padding: 10px 0;
+        z-index: 99;
+        opacity: 1;
+        visibility: visible;
+        background: #fff;
+        box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+        }
+
+        .navbar-mobile .dropdown ul li {
+        min-width: 200px;
+        }
+
+        .navbar-mobile .dropdown ul a {
+        padding: 10px 20px;
+        }
+
+        .navbar-mobile .dropdown ul a i {
+        font-size: 12px;
+        }
+
+        .navbar-mobile .dropdown ul a:hover,
+        .navbar-mobile .dropdown ul .active:hover,
+        .navbar-mobile .dropdown ul li:hover>a {
+        color: #5cb874;
+        }
+
+        .navbar-mobile .dropdown>.dropdown-active {
+        display: block;
+        }
+
+        /*--------------------------------------------------------------
+        # Footer
+        --------------------------------------------------------------*/
+        #footer {
+        background: rgb(48, 46, 46);
+        color: #fff;
+        font-size: 14px;
+        text-align: left;
+        padding: 10px 0;
+        height: 200px;
+        position: relative;
+        transform : translateY(-100%);
+        width: 100%;
+        padding: 20px 0;
+        }
+
+        #footer h3 {
+        font-size: 36px;
+        font-weight: 700;
+        color: #fff;
+        position: relative;
+        font-family: "Poppins", sans-serif;
+        padding: 0;
+        margin: 0 0 15px 0;
+        }
+
+        #footer p {
+        font-size: 15;
+        font-style: italic;
+        padding: 0;
+        margin: 0 0 40px 0;
+        }
+
+        #footer .social-links {
+        margin: 0 0 40px 0;
+        }
+
+        #footer .social-links a {
+        font-size: 18px;
+        display: inline-block;
+        background: #5cb874;
+        color: #fff;
+        line-height: 1;
+        padding: 8px 0;
+        margin-right: 4px;
+        border-radius: 50%;
+        text-align: center;
+        width: 36px;
+        height: 36px;
+        transition: 0.3s;
+        }
+
+        #footer .social-links a:hover {
+        background: #449d5b;
+        color: #fff;
+        text-decoration: none;
+        }
+
+        #footer .copyright {
+        margin: 0 0 5px 0;
+        }
+
+        #footer .credits {
+        font-size: 13px;
+        }
+        #footer .footer_logo {
+        color: white;
+        }
+
+    </style>
+    <!-- 공통 스타일 적용 End -->
+
+    <!-- 스타일 블록 Start -->
+    {% block extra-style %}
+    {% endblock %}
+    <!-- 스타일 블록 End -->
+</head>
+
+<body>
+    <header id="header" class="d-flex align-items-center">
+        <div class="navbar-collapse align-items-center ml-5">
+            <div class="navbar-collapse align-items-center justify-content-between">
+                
+                <nav id="navbar" class="navbar navbar-expand-md ">
+                    <h1 class="logo me-auto">
+                        <a class="navbar-brand ml-5 mb-0 mx-5 font-weight-bold nav-link scrollto active" href="{% url 'home' %}">HOME</a>
+                    </h1>
+                    <ul class="navbar-nav mx-5" style="width:45%">
+                        <li class="dropdown">
+                            <a href="#">
+                                <span class="mx-1">카테고리</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </a>
+                            <ul>
+                                <li><a href="{% url 'blog:category' %}">전체 카테고리</a></li>
+                                <hr>
+                                <li><a href="/blog/category/8/">지구</a></li>
+                                <li><a href="/blog/category/9/">기후</a></li>
+                                <li><a href="/blog/category/10/">친환경</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="nav-link scrollto mx-1" href="{% url 'blog:index' %}">포스팅</a></li>
+                        <!-- <li><a class="nav-link scrollto mx-1" href="{% url 'photo:index' %}">앨범</a></li> -->
+                        <li><a class="nav-link scrollto mx-1" href="{% url 'video:video' %}">영상</a></li>
+                        <li><a class="nav-link scrollto mx-1" href="{% url 'blog:site' %}">사이트</a></li>
+                        <li><a class="nav-link scrollto mx-1" href="{% url 'blog:post_archive' %}">아카이브</a></li>
+                        <!-- <li><a class="nav-link scrollto" href="{% url 'bookmark:index' %}">북마크</a></li> -->
+                    </ul> 
+       
+
+                    <div class="navbar">
+                        <ul class="navbar-nav ml-3">
+                            <form method="post" action="{% url 'blog:post_search' %}"> {% csrf_token %}
+                                <input type="search" class="btn btn-outline-success btn-sm disabled" placeholder="검색어를 입력하세요" name="search_word" >
+                                <button class="btn btn-outline-success btn-sm" type="submit" href="{% url 'blog:post_search' %}" > 검색 </button>
+                            </form>
+                        </ul>
+
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown mx-1 btn">
+                                {% if user.is_active %} <!-- 로그인된 상태라면 -->
+                                <a class="nav-link scrollto active dropdown-toggle text-black" href="#" data-toggle="dropdown">
+                                    <i class="fas fa-user"></i>&ensp;{% firstof user.get_short_name user.get_username %}&ensp;
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{% url 'logout' %}">로그아웃</a>
+                                    <a class="dropdown-item" href="{% url 'password_change' %}">비밀번호 변경</a>
+                                    <a class="dropdown-item" href="{% url 'admin:index' %}">환경설정</a>
+                                    <div class="dropdown-divider"></div>
+                                    <!-- <a class="dropdown-item" href="{% url 'bookmark:add' %}">북마크 추가</a> -->
+                                    <a class="dropdown-item" href="{% url 'blog:category_add' %}">카테고리 추가</a>
+                                    <a class="dropdown-item" href="{% url 'blog:add' %}">포스팅 추가</a>
+                                    <!-- <a class="dropdown-item" href="{% url 'photo:album_add' %}">앨범 추가</a> -->
+                                    <!-- <a class="dropdown-item" href="{% url 'photo:photo_add' %}">사진 추가</a> -->
+                                    <a class="dropdown-item" href="{% url 'video:video_add' %}">영상 추가</a>
+                                    <a class="dropdown-item" href="{% url 'blog:site_add' %}">사이트 추가</a>
+                                
+                                    <div class="dropdown-divider"></div>
+                                    <!-- <a class="dropdown-item" href="{% url 'bookmark:change' %}">북마크 수정</a> -->
+                                    <a class="dropdown-item" href="{% url 'blog:category_change' %}">카테고리 수정</a>
+                                    <a class="dropdown-item" href="{% url 'blog:change' %}">포스팅 수정</a>
+                                    <!-- <a class="dropdown-item" href="{% url 'photo:album_change' %}">앨범 수정</a> -->
+                                    <!-- <a class="dropdown-item" href="{% url 'photo:photo_change' %}">사진 수정</a> -->
+                                    <a class="dropdown-item" href="{% url 'video:video_change' %}">영상 수정</a>
+                                    <a class="dropdown-item" href="{% url 'blog:site_change' %}">사이트 수정</a>
+            
+                                </div>
+            
+            
+                                {% else %} <!-- 로그인된 상태가 아니라면 -->
+                                <a class="nav-link scrollto active dropdown-toggle text-black" href="#" data-toggle="dropdown">
+                                    로그인 / 회원가입
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{% url 'login' %}">로그인</a>
+                                    <a class="dropdown-item" href="{% url 'register' %}">회원가입</a>
+                                </div>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- <i class="fa-solid fa-list mobile-nav-toggle"></i> -->
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div id="main-wrapper">
+        <div id="main-content" class="">
+            <!-- 콘텐츠 블록 Start -->
+            {% block content %}
+            {% endblock %}
+            <!-- 콘텐츠 블록 End -->
+        </div>
+    </div>
+
+    <!-- 푸터 Start -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer_logo">JIGU BLOG</div>
+            <div class="social-links">
+                <a href="#" class="linkedin"><i class="fa-solid fa-phone"></i></a>
+                <a href="#" class="twitter"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+            <div class="copyright">
+                © Copyright <strong><span>Green</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/green-free-one-page-bootstrap-template/ -->
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+        </div>
+      </footer>
+    <!-- 푸터 End -->
+</body>
+
+<script src="https://kit.fontawesome.com/600ceba5b1.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<!-- 스크립트 블록 Start -->
+{% block extra-script %}
+
+{% endblock %}
+<!-- 스크립트 블록 End -->
+</html>

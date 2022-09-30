@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}포스팅{% endblock %}
+
+{% block extra-style %}
+<style>
+    a:link {
+    color : green;
+    text-decoration: none;
+    }
+    a:visited {
+    color : green;
+    text-decoration: none;
+    }
+    a:hover {
+    color : yellowgreen;
+    text-decoration: underline;
+    }
+    a:active {
+    color : green;
+    text-decoration: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <a class="h1 title mr-5">포스팅</a>
+    {% if user.is_active %}
+        <a class="btn btn-online-dark" href=" {% url 'blog:add' %}">글쓰기</a>
+        <a class="btn btn-online-dark" href=" {% url 'blog:change' %}">수정하기</a> <br><br>
+    {% endif %}
+        <br><br>
+        {% for post in posts %}
+            <a class="h6" style="color: gray;">카테고리: {{ post.category }}</a>
+            <hr>
+            <div class="align-self-auto row">
+                <img src="{{ post.image.thumb_url }}" alt="{{ post.image }}" class="col-md-4" style="width: 200px;">
+                <div class="col-md-8" style="padding-top:50px">
+                    <a class="h2" href='{{ post.get_absolute_url }}'>{{ post.title }}</a><br>
+                    <a> : {{ post.description }}</a>
+                </div> 
+            </div> <br>
+        {% endfor%}
+
+
+    <br />
+
+    <div>
+        <span>
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number}}">이전 페이지</a>
+            {% endif%}
+
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number}}">다음 페이지</a>
+            {% endif%}
+        </span>
+        <!-- <div>
+            <a href="/blog/archive">아카이브로 보기</a>
+        </div> -->
+
+    </div>
+</div>
+{% endblock %}

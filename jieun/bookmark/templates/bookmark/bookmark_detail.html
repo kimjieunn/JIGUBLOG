@@ -1,0 +1,34 @@
+
+{% extends "base.html" %}
+
+{% block title %}bookmark_detail.html{% endblock %}
+{% block extra-style %}
+<style>
+    a:link {
+    color : green;
+    text-decoration: none;
+    }
+    a:visited {
+    color : green;
+    text-decoration: none;
+    }
+    a:hover {
+    color : yellowgreen;
+    text-decoration: underline;
+    }
+    a:active {
+    color : green;
+    text-decoration: none;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>북마크 디테일</h1>
+    <ul>
+        <li>
+            <a href="{{ object.url }}">{{ object.url }}</a>
+        </li>
+    </ul>
+</div>
+{% endblock %}

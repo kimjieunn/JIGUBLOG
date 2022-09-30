@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+<!-- 제목 블록 Start (기본값 My Blog Page) -->
+{% block title %}
+사이트 삭제
+{% endblock %}
+<!-- 제목 블록 End -->
+
+<!-- 스타일 블록 Start -->
+{% block extra-style %}
+<style>
+    a:link {
+    color : green;
+    text-decoration: none;
+    }
+    a:visited {
+    color : green;
+    text-decoration: none;
+    }
+    a:hover {
+    color : yellowgreen;
+    text-decoration: underline;
+    }
+    a:active {
+    color : green;
+    text-decoration: none;
+    }
+</style>
+{% endblock %}
+<!-- 스타일 블록 End -->
+
+<!-- 콘텐츠 블록 Start -->
+{% block content %}
+<div class="container">
+    <h1>사이트 삭제하기</h1>
+    <br>
+
+    <form method="post">{% csrf_token %}
+        <p>"{{ object }}" 사이트를 진짜 지우시겠습니까? 되돌릴 수 없습니다.</p>
+        <input type="submit" value="Confirm" class="btn btn-danger btn-sm" />
+    </form>
+</div>
+{% endblock %}
+<!-- 콘텐츠 블록 End -->
+
+<!-- 스크립트 블록 Start -->
+{% block extra-script %}
+
+{% endblock %}
+<!-- 스크립트 블록 End -->
